@@ -2064,5 +2064,54 @@ try {
 }
 </script>
 
+<!-- Smash Karts for Mango -->
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  const grid = document.querySelector(".mango-game-grid");
+
+  if (!grid) return;
+
+  // Do not create the same card twice.
+  if (document.getElementById("playSmashMango")) return;
+
+  const card = document.createElement("article");
+  card.className = "mango-game-card";
+
+  card.innerHTML = `
+    <div class="mango-game-art racing">🏎️</div>
+    <h2>Smash Karts</h2>
+    <p>3D multiplayer kart battles!</p>
+    <button id="playSmashMango" class="primary">
+      ▶ Play Smash Karts
+    </button>
+  `;
+
+  grid.appendChild(card);
+
+  document.getElementById("playSmashMango").onclick = () => {
+    const url = "https://webgltest-17af1.firebaseapp.com/";
+
+    const player = document.getElementById("mangoPlayer");
+    const frame = document.getElementById("mangoGameFrame");
+
+    document.getElementById("mangoGameTitle").textContent =
+      "Smash Karts";
+
+    document.getElementById("mangoOpenGame").href = url;
+
+    document.getElementById("mangoGameStatus").textContent =
+      "Loading Smash Karts...";
+
+    frame.src = url;
+    frame.title = "Smash Karts";
+    player.hidden = false;
+
+    player.scrollIntoView({
+      behavior: "smooth"
+    });
+  };
+});
+</script>
+
 </body>
 </html>
