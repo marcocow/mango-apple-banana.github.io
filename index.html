@@ -2115,5 +2115,74 @@ const url = "https://smashkarts.io/";
 });
 </script>
 
+<!-- Ragdoll games for Mango -->
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  const grid = document.querySelector(".mango-game-grid");
+  if (!grid || document.getElementById("mangoRagdollHit")) return;
+
+  const games = [
+    {
+      id: "mangoRagdollHit",
+      name: "Ragdoll Hit",
+      icon: "🥊",
+      url: "https://poki.com/en/g/ragdoll-hit"
+    },
+    {
+      id: "mangoRagdollArchers",
+      name: "Ragdoll Archers",
+      icon: "🏹",
+      url: "https://www.crazygames.com/game/ragdoll-archers"
+    }
+  ];
+
+  games.forEach(game => {
+    const card = document.createElement("article");
+    card.className = "mango-game-card";
+
+    const icon = document.createElement("div");
+    icon.className = "mango-game-art";
+    icon.textContent = game.icon;
+
+    const title = document.createElement("h2");
+    title.textContent = game.name;
+
+    const button = document.createElement("button");
+    button.id = game.id;
+    button.className = "primary";
+    button.textContent = "▶ Play " + game.name;
+
+    button.onclick = () => {
+      const player = document.getElementById("mangoPlayer");
+      const frame = document.getElementById("mangoGameFrame");
+
+      document.getElementById("mangoGameTitle").textContent =
+        game.name;
+
+      document.getElementById("mangoOpenGame").href =
+        game.url;
+
+      document.getElementById("mangoGameStatus").textContent =
+        "If the game does not load here, open it separately.";
+
+      frame.src = game.url;
+      frame.title = game.name;
+      player.hidden = false;
+
+      player.scrollIntoView({ behavior: "smooth" });
+    };
+
+    const link = document.createElement("a");
+    link.href = game.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Open game separately";
+
+    card.append(icon, title, button, link);
+    grid.appendChild(card);
+  });
+});
+</script>
+
 </body>
 </html>
